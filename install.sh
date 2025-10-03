@@ -51,4 +51,4 @@ done
 git submodule update --init --recursive
 git submodule update --remote --recursive
 
-stow -R -v -t ~ -d ~/dev/environment/home .
+stow -R -v -t ~ -d ./home .
