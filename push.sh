@@ -11,7 +11,7 @@ git submodule foreach "
 
 # Commit and push the main repository
 git add .
-git commit -m '${msg:-"update"}'
+git commit -m "${msg:-"update"}"
 git push origin main
 
 
