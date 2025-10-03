@@ -1,0 +1,8 @@
+stow
+neovim
+wget
+tree
+unzip
+git
+fzf
+tmux
