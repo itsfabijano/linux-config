@@ -5,13 +5,6 @@ ZSH_PLUGINS=(
     "https://github.com/zsh-users/zsh-syntax-highlighting.git"
 )
 
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  echo "Oh My Zsh is not installed. Installing..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-else
-  echo "Oh My Zsh is already installed."
-fi
-
 # --- APT package install ---
 PKG_DIR="./packages"
 
@@ -32,6 +25,18 @@ for file in "$PKG_DIR"/*; do
     done < "$file"
 done
 
+git submodule update --init --recursive
+git submodule update --remote --recursive
+
+stow -R -v -t ~ -d ./home .
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Oh My Zsh is not installed. Installing..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo "Oh My Zsh is already installed."
+fi
+
 # --- Zsh plugins ---
 ZSH_PLUGIN_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
 
@@ -47,8 +52,3 @@ for repo in "${ZSH_PLUGINS[@]}"; do
         git clone "$repo" "$target"
     fi
 done
-
-git submodule update --init --recursive
-git submodule update --remote --recursive
-
-stow -R -v -t ~ -d ./home .
