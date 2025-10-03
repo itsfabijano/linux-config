@@ -48,4 +48,7 @@ for repo in "${ZSH_PLUGINS[@]}"; do
     fi
 done
 
+git submodule update --init --recursive
+git submodule update --remote --recursive
+
 stow -R -v -t ~ -d ~/dev/environment/home .
